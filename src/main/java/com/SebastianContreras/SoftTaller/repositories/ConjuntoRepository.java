@@ -1,4 +1,4 @@
-package com.SebastianContreras.SoftTaller.persistence;
+package com.SebastianContreras.SoftTaller.repositories;
 
 import com.SebastianContreras.SoftTaller.entities.Conjunto;
 import org.springframework.data.jpa.repository.JpaRepository;
