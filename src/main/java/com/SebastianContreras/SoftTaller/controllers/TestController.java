@@ -6,9 +6,8 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 @RestController
-@RequestMapping("/test/")
 public class TestController {
-    @GetMapping("/get")
+    @GetMapping("/api/test")
     public ResponseEntity<?> testGet() {
         return ResponseEntity.ok("GET OK");
     }

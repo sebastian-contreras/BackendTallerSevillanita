@@ -33,7 +33,7 @@ public class Proveedor {
 //
 //    @OneToMany(mappedBy = "proveedorIdProveedor")
 //    private Set<CompraRepuesto> proveedorIdProveedorCompraRepuestoes;
-//
+
 //    @OneToMany(mappedBy = "proveedor")
 //    private Set<Neumaticos> proveedorNeumaticoses;
 //

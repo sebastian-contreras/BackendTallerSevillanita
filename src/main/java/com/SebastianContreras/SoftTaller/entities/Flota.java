@@ -48,7 +48,7 @@ public class Flota {
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "mantenimiento_id_mantenimiento_id", nullable = false)
     private Mantenimiento mantenimientoIdMantenimiento;
-//
+
 //    @OneToMany(mappedBy = "patente")
 //    private Set<Planilla> patentePlanillas;
 

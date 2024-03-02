@@ -25,7 +25,7 @@ public class Repuesto {
 
     @OneToMany(mappedBy = "repuesto")
     private Set<Mantenimiento> repuestoMantenimientoes;
-
+//
 //    @OneToMany(mappedBy = "repuestoCodigo")
 //    private Set<CompraRepuesto> repuestoCodigoCompraRepuestoes;
 }
