@@ -4,12 +4,16 @@ import com.SebastianContreras.SoftTaller.DTO.PedidoDTO;
 import com.SebastianContreras.SoftTaller.entities.Pedido;
 import com.SebastianContreras.SoftTaller.services.PedidoService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import java.net.URI;
 import java.net.URISyntaxException;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 import java.util.Optional;
 
 @RestController
@@ -21,40 +25,51 @@ public class PedidosController {
     @GetMapping("/all")
     public ResponseEntity<?> findAll() {
         List<Pedido> pedidoDtoList = pedidoService.findAll();
-//                .map(pedido -> PedidoDTO.builder()
-//                        .id(pedido.getId())
-//                        .name(pedido.getName())
-//                        .productList(pedido.getProductList())
-//                        .build()).toList();
         return ResponseEntity.ok(pedidoDtoList);
     }
+    @GetMapping("/")
+    public ResponseEntity<?> findAll(Pageable pageable) {
+        Map<String, Object> response = new HashMap<>();
+        Page<Pedido> pedidoDtoList = pedidoService.findAllPage(pageable);
+        response.put("Pedidos",pedidoDtoList.getContent());
+        response.put("totalPages",pedidoDtoList.getTotalPages());
+        response.put("totalElements",pedidoDtoList.getTotalElements());
+        return ResponseEntity.ok(response);
+    }
+
 
     @GetMapping("/find/{id}")
     public ResponseEntity<?> findById(@PathVariable Integer id) {
         Optional<Pedido> pedidoOptional = pedidoService.findById(id);
-        if (pedidoOptional.isPresent()) {
-            Pedido pedido = pedidoOptional.get();
-//            MakerDto pedidoDto = MakerDto.builder()
-//                    .id(pedido.getId())
-//                    .name(pedido.getName())
-//                    .productList(pedido.getProductList())
-//                    .build();
-            return ResponseEntity.ok(pedido);
-        }
-        return ResponseEntity.notFound().build();
+        Pedido pedido = pedidoOptional.get();
+        return ResponseEntity.ok(pedido);
     }
 
     @PostMapping("/save")
     public ResponseEntity<?> save(@RequestBody PedidoDTO pedidoDto) throws URISyntaxException {
-        pedidoService.save(Pedido.builder()
+        Pedido newPedido = Pedido.builder()
                 .chofer(pedidoDto.getChofer())
                 .fechaPedido(pedidoDto.getFechaPedido())
                 .fechaLlegada(pedidoDto.getFechaLlegada())
                 .kilometrajePedido(pedidoDto.getKilometrajePedido())
                 .patente(pedidoDto.getPatente())
                 .problemas(pedidoDto.getProblemas())
-                .build());
-        return ResponseEntity.created(new URI("/api/pedidos/save")).build();
+                .estado(true)
+                .build();
+        return ResponseEntity.created(new URI("/api/pedidos/save")).body(pedidoService.save(newPedido));
+    }
+    @PutMapping("/save/{id}")
+    public ResponseEntity<?> save(@RequestBody PedidoDTO pedidoDto, @PathVariable Integer id ) throws URISyntaxException {
+        Optional<Pedido> pedidoOptional = pedidoService.findById(id);
+        if(!pedidoOptional.isPresent()){
+            return ResponseEntity.notFound().build();
+        }
+        Pedido pedido = pedidoOptional.get();
+        System.out.println(pedido);
+        pedido.setChofer(pedidoDto.getChofer());
+            pedido.setProblemas(pedidoDto.getProblemas());
+            pedido.setEstado(pedidoDto.getEstado());
+        return ResponseEntity.created(new URI("/api/pedidos/save")).body(pedidoService.save(pedido));
     }
 
 
