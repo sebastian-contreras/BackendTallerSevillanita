@@ -1,11 +1,13 @@
 package com.SebastianContreras.SoftTaller.controllers;
 
 import com.SebastianContreras.SoftTaller.DTO.PedidoDTO;
+import com.SebastianContreras.SoftTaller.entities.Conjunto;
 import com.SebastianContreras.SoftTaller.entities.Pedido;
 import com.SebastianContreras.SoftTaller.services.PedidoService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
+import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
