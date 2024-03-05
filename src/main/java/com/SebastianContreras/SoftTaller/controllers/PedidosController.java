@@ -27,13 +27,15 @@ public class PedidosController {
         List<Pedido> pedidoDtoList = pedidoService.findAll();
         return ResponseEntity.ok(pedidoDtoList);
     }
+
     @GetMapping("/")
     public ResponseEntity<?> findAll(Pageable pageable) {
         Map<String, Object> response = new HashMap<>();
         Page<Pedido> pedidoDtoList = pedidoService.findAllPage(pageable);
-        response.put("Pedidos",pedidoDtoList.getContent());
-        response.put("totalPages",pedidoDtoList.getTotalPages());
-        response.put("totalElements",pedidoDtoList.getTotalElements());
+        response.put("Pedidos", pedidoDtoList.getContent());
+        response.put("currentePage", pedidoDtoList.getNumber());
+        response.put("totalPages", pedidoDtoList.getTotalPages());
+        response.put("totalElements", pedidoDtoList.getTotalElements());
         return ResponseEntity.ok(response);
     }
 
@@ -58,17 +60,18 @@ public class PedidosController {
                 .build();
         return ResponseEntity.created(new URI("/api/pedidos/save")).body(pedidoService.save(newPedido));
     }
+
     @PutMapping("/save/{id}")
-    public ResponseEntity<?> save(@RequestBody PedidoDTO pedidoDto, @PathVariable Integer id ) throws URISyntaxException {
+    public ResponseEntity<?> save(@RequestBody PedidoDTO pedidoDto, @PathVariable Integer id) throws URISyntaxException {
         Optional<Pedido> pedidoOptional = pedidoService.findById(id);
-        if(!pedidoOptional.isPresent()){
+        if (!pedidoOptional.isPresent()) {
             return ResponseEntity.notFound().build();
         }
         Pedido pedido = pedidoOptional.get();
         System.out.println(pedido);
-        pedido.setChofer(pedidoDto.getChofer());
-            pedido.setProblemas(pedidoDto.getProblemas());
-            pedido.setEstado(pedidoDto.getEstado());
+        pedido.setChofer(pedidoDto.getChofer() != null ? pedidoDto.getChofer() : pedido.getChofer());
+        pedido.setProblemas(pedidoDto.getProblemas() != null ? pedidoDto.getProblemas() : pedido.getProblemas());
+        pedido.setEstado(pedidoDto.getEstado() != null ? pedidoDto.getEstado() : pedido.getEstado());
         return ResponseEntity.created(new URI("/api/pedidos/save")).body(pedidoService.save(pedido));
     }
 

@@ -3,6 +3,8 @@ package com.SebastianContreras.SoftTaller.entities;
 import jakarta.persistence.*;
 import lombok.*;
 
+import java.util.Set;
+
 @Setter
 @Getter
 @Builder
@@ -30,13 +32,13 @@ public class Proveedor {
 
     @Column
     private Integer habilitado;
-//
-//    @OneToMany(mappedBy = "proveedorIdProveedor")
-//    private Set<CompraRepuesto> proveedorIdProveedorCompraRepuestoes;
 
-//    @OneToMany(mappedBy = "proveedor")
-//    private Set<Neumaticos> proveedorNeumaticoses;
-//
-//    @OneToMany(mappedBy = "proveedorRecapado")
-//    private Set<Recapado> proveedorRecapadoRecapadoes;
+    @OneToMany(mappedBy = "proveedorIdProveedor")
+    private Set<CompraRepuesto> proveedorIdProveedorCompraRepuestoes;
+
+    @OneToMany(mappedBy = "proveedor")
+    private Set<Neumaticos> proveedorNeumaticoses;
+
+    @OneToMany(mappedBy = "proveedorRecapado")
+    private Set<Recapado> proveedorRecapadoRecapadoes;
 }

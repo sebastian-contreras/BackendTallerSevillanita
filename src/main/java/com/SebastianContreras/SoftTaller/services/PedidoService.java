@@ -18,6 +18,7 @@ public class PedidoService {
     public List<Pedido> findAll() {
         return pedidoDao.findAll();
     }
+
     public Page<Pedido> findAllPage(Pageable pageable) {
         return pedidoDao.findAllPage(pageable);
     }
@@ -28,7 +29,7 @@ public class PedidoService {
 
 
     public Pedido save(Pedido pedido) {
-       return pedidoDao.save(pedido);
+        return pedidoDao.save(pedido);
     }
 
 

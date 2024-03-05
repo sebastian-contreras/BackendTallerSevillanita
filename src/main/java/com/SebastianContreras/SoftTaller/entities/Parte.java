@@ -25,7 +25,7 @@ public class Parte {
     @JoinColumn(name = "conjunto_codigo_id", nullable = false)
     private Conjunto conjuntoCodigo;
 
-//    @OneToMany(mappedBy = "parteCodigo")
-//    private Set<Servicio> parteCodigoServicios;
+    @OneToMany(mappedBy = "parteCodigo")
+    private Set<Servicio> parteCodigoServicios;
 
 }

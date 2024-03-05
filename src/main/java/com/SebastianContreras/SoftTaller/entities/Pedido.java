@@ -4,6 +4,8 @@ import jakarta.persistence.*;
 import lombok.*;
 
 import java.time.LocalDate;
+import java.util.Set;
+
 @Setter
 @Getter
 @Builder
@@ -38,7 +40,7 @@ public class Pedido {
     @Column
     private Boolean estado;
 
-//    @OneToMany(mappedBy = "pedido")
-//    private Set<Planilla> pedidoPlanillas;
+    @OneToMany(mappedBy = "pedido")
+    private Set<Planilla> pedidoPlanillas;
 
 }

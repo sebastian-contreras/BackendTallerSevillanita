@@ -4,6 +4,7 @@ import jakarta.persistence.*;
 import lombok.*;
 
 import java.time.LocalDate;
+import java.util.Set;
 
 @Setter
 @Getter
@@ -49,8 +50,8 @@ public class Flota {
     @JoinColumn(name = "mantenimiento_id_mantenimiento_id", nullable = false)
     private Mantenimiento mantenimientoIdMantenimiento;
 
-//    @OneToMany(mappedBy = "patente")
-//    private Set<Planilla> patentePlanillas;
+    @OneToMany(mappedBy = "patente")
+    private Set<Planilla> patentePlanillas;
 
 }
 
