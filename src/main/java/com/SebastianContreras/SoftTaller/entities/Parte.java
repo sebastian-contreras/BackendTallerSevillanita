@@ -1,5 +1,9 @@
 package com.SebastianContreras.SoftTaller.entities;
 
+import com.fasterxml.jackson.annotation.JsonBackReference;
+import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
+import com.fasterxml.jackson.annotation.JsonManagedReference;
 import jakarta.persistence.*;
 import lombok.*;
 
@@ -21,6 +25,8 @@ public class Parte {
     @Column(length = 100)
     private String descripcionParte;
 
+
+    @JsonBackReference
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "conjunto_codigo_id", nullable = false)
     private Conjunto conjuntoCodigo;
