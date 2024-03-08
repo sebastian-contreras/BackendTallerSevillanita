@@ -23,9 +23,10 @@ public class Repuesto {
     @Column(length = 20)
     private String unidadMedida;
 
-    @OneToMany(mappedBy = "repuesto")
+    @ManyToMany
     private Set<Mantenimiento> repuestoMantenimientoes;
 
     @OneToMany(mappedBy = "repuestoCodigo")
     private Set<CompraRepuesto> repuestoCodigoCompraRepuestoes;
+
 }

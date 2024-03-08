@@ -32,9 +32,8 @@ public class Mantenimiento {
     @Column
     private Integer habilitado;
 
-    @ManyToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name = "repuesto_id", nullable = false)
-    private Repuesto repuesto;
+    @ManyToMany
+    private Set<Repuesto> repuesto;
 
     @OneToMany(mappedBy = "mantenimientoIdMantenimiento")
     private Set<Flota> mantenimientoIdMantenimientoFlotas;

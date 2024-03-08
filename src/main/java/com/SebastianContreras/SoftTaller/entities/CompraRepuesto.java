@@ -6,6 +6,7 @@ import java.time.LocalDate;
 import java.util.Set;
 
 @Entity
+@Table(name = "compra_repuesto")
 public class CompraRepuesto {
 
     @Id

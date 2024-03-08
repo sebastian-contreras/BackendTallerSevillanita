@@ -1,5 +1,8 @@
 package com.SebastianContreras.SoftTaller.entities;
 
+import com.fasterxml.jackson.annotation.JsonBackReference;
+import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.fasterxml.jackson.annotation.JsonManagedReference;
 import jakarta.persistence.*;
 import lombok.*;
 
@@ -35,8 +38,8 @@ public class Proveedor {
 
     @OneToMany(mappedBy = "proveedorIdProveedor")
     private Set<CompraRepuesto> proveedorIdProveedorCompraRepuestoes;
-
-    @OneToMany(mappedBy = "proveedor")
+    @JsonIgnore
+    @OneToMany(mappedBy = "proveedor",fetch = FetchType.LAZY)
     private Set<Neumaticos> proveedorNeumaticoses;
 
     @OneToMany(mappedBy = "proveedorRecapado")
